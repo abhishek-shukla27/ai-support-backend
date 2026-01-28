@@ -42,5 +42,6 @@ def upload_knowledge(data: KnowledgeCreate):
 
 @router.post("/chat")
 def chat(data: ChatRequest):
-    answer = answer_question(data.question)
+    answer = answer_question(business_id=data.business_id,
+                             question=data.question)
     return {"answer": answer}

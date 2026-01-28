@@ -1,13 +1,7 @@
-from app.ai.embeddings import get_embedding
+from app.services.knowledge_service import BUSINESS_KNOWLEDGE
 from app.ai.vector_store import search
 from app.ai.llm import ask_llm
 
-
-# Temporary in-memory knowledge store
-BUSINESS_KNOWLEDGE = {}
-
-def add_knowledge(business_id: str, content: str):
-    BUSINESS_KNOWLEDGE[business_id] = content
 
 def answer_question(business_id: str, question: str):
     context = BUSINESS_KNOWLEDGE.get(business_id)
