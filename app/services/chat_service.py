@@ -1,5 +1,5 @@
 from app.services.knowledge_service import BUSINESS_KNOWLEDGE
-from app.ai.vector_store import search
+
 from app.ai.llm import ask_llm
 
 

@@ -1,5 +1,4 @@
 
-from app.ai.vector_store import add_text
 
 BUSINESS_KNOWLEDGE = {}
 
