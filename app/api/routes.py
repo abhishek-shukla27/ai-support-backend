@@ -37,7 +37,7 @@ def register_business(
 
 @router.post("/knowledge")
 def upload_knowledge(data: KnowledgeCreate):
-    add_knowledge(data.content)
+    add_knowledge(data.business_id,data.content)
     return {"message": "Knowledge added successfully"}
 
 @router.post("/chat")
