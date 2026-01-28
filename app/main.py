@@ -6,9 +6,7 @@ app = FastAPI(title="AI Support API")
 
 app.include_router(router)
 
-@app.get("/")
-def root():
-    return {"message": "AI Support Backend Running 🚀"}
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,3 +20,7 @@ app.add_middleware(
 )
 
 app.include_router(router)
+
+@app.get("/")
+def root():
+    return {"message": "AI Support Backend Running 🚀"}
