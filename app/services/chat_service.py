@@ -2,25 +2,29 @@ from app.ai.embeddings import get_embedding
 from app.ai.vector_store import search
 from app.ai.llm import ask_llm
 
-def answer_question(question: str):
-    query_embedding = get_embedding(question)
-    contexts = search(query_embedding)
 
-    if not contexts:
-        return "Sorry, I don't have information on that."
+# Temporary in-memory knowledge store
+BUSINESS_KNOWLEDGE = {}
 
-    context_text = "\n".join(contexts)
+def add_knowledge(business_id: str, content: str):
+    BUSINESS_KNOWLEDGE[business_id] = content
+
+def answer_question(business_id: str, question: str):
+    context = BUSINESS_KNOWLEDGE.get(business_id)
+
+    if not context:
+        return "I don't have information about this business yet."
 
     prompt = f"""
-Use ONLY the context below to answer.
+You are a customer support assistant.
+Answer ONLY using the information below.
 
-Context:
-{context_text}
+Business Info:
+{context}
 
 Question:
 {question}
 
-Answer in a friendly, professional tone:
+Answer:
 """
-
     return ask_llm(prompt)
