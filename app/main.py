@@ -3,7 +3,7 @@ from app.api.routes import router
 from fastapi.middleware.cors import CORSMiddleware
 from app.services.demo_data import load_demo_data
 from contextlib import asynccontextmanager
-
+from app.services.knowledge_service import BUSINESS_KNOWLEDGE
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     load_demo_data()
@@ -21,7 +21,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+@router.get("/debug/knowledge")
+def debug_knowledge():
+    return BUSINESS_KNOWLEDGE
 
 app.include_router(router)
 
