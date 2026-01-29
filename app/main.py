@@ -2,10 +2,14 @@ from fastapi import FastAPI
 from app.api.routes import router
 from fastapi.middleware.cors import CORSMiddleware
 from app.services.demo_data import load_demo_data
-app = FastAPI(title="AI Support API")
+from contextlib import asynccontextmanager
 
+@asynccontextmanager
+async def lifespan(app:FastAPI):
+    load_demo_data()
+    yield
 
-
+app = FastAPI(title="AI Support API",lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,9 +21,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-@app.on_event("startup")
-def startup_event():
-    load_demo_data()
+
 
 app.include_router(router)
 
