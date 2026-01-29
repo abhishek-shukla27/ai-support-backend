@@ -1,9 +1,9 @@
-from app.services.knowledge_service import BUSINESS_KNOWLEDGE
-
+from app.services.knowledge_service import BUSINESS_KNOWLEDGE,normalize_business_id
 from app.ai.llm import ask_llm
 
 
 def answer_question(business_id: str, question: str):
+    key=normalize_business_id(business_id)
     context = BUSINESS_KNOWLEDGE.get(business_id)
 
     if not context:

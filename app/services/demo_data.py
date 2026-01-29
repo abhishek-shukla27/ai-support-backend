@@ -1,6 +1,7 @@
-from app.services.knowledge_service import BUSINESS_KNOWLEDGE
+from app.services.knowledge_service import BUSINESS_KNOWLEDGE,normalize_business_id
 
 def load_demo_data():
+    key=normalize_business_id("Sync IO")
     BUSINESS_KNOWLEDGE["Sync IO"] = """
 Company Name: Sync IO
 
