@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.api.routes import router
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.services.demo_data import load_demo_data
 app = FastAPI(title="AI Support API")
 
 
@@ -17,6 +17,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+@app.on_event("startup")
+def startup_event():
+    load_demo_data()
 
 app.include_router(router)
 
